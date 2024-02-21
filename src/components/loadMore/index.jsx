@@ -6,13 +6,14 @@ export default function LoadMoreData(){
     const[products,setProducts] = useState([])
     const[count,setCount] = useState(0)
     const[nextProducts,setNextProducts] = useState([])
+    const[countProducts,setCountProducts] = useState(0)
 
     async function fetchProducts(){
         try{
             setLoading(true)
             const response = await fetch (`https://dummyjson.com/products?limit=10&skip=${count===0 ? 0 : count*10}`);
             const result = await response.json()
-            console.log(result)
+            console.log(result, 'length=',result.products.length)
 
             if(result&& result.products && result.products.length){
                 setProducts(result.products)
@@ -26,10 +27,14 @@ export default function LoadMoreData(){
     }
 
     async function loadMore(){
-        setCount(count+10)
-        const response = await fetch(`https://dummyjson.com/products?limit=10&skip=${count}`)
+        const response = await fetch(`https://dummyjson.com/products?limit=10&skip=${count+10}`)
         const result = await response.json()
-        setNextProducts(result.products)
+        let nextSet = [...nextProducts]
+        nextSet.push(result.products)
+        setNextProducts(nextSet)
+        console.log(nextProducts,'length of nextProducts = ', nextProducts.length)
+        setCountProducts(countProducts+1)
+        setCount(count+10)
     }
 
     useEffect(()=>{
@@ -49,10 +54,12 @@ export default function LoadMoreData(){
         </div>)
         ) : null}
 
-            {nextProducts ?(
-            nextProducts.map(product=><div key={product.id}>{product.title}</div>)
-            ) : null}
-
+        {nextProducts ? nextProducts.map(innerArray =>
+            innerArray.map((product) =>
+                <div key={product.id}>
+                    <img src={product.thumbnail} alt={product.title}/>
+                </div>)) : null}
+            
         <button onClick={loadMore}>Load more data</button>
         </div>
     </>)
