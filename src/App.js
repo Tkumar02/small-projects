@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import LoadMoreData from './components/loadMore';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Accordion></Accordion> */}
+      {/* <RandomColour></RandomColour> */}
+      {/* <StarRating noOfStars={10}></StarRating> */}
+      {/* <ImageSlider
+        url={"https://picsum.photos/v2/list"}
+        page={"1"}
+        limit={"10"}
+      /> */}
+      <LoadMoreData/>
     </div>
   );
 }
