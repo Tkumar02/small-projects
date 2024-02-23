@@ -1,5 +1,6 @@
 import './App.css';
-import LoadMoreData from './components/loadMore';
+import Treeview from './components/treeView';
+import menus from './components/treeView/data';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         page={"1"}
         limit={"10"}
       /> */}
-      <LoadMoreData/>
+      {/* <LoadMoreData/> */}
+      <Treeview menus={menus}/>
     </div>
   );
 }
